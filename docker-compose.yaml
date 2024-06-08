@@ -1,0 +1,28 @@
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    networks:
+      - app-tier
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=postgres
+      - PGPORT=5432
+
+  app:
+    restart: on-failure
+    build: .
+    networks:
+      - app-tier
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.docker

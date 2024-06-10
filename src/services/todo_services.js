@@ -3,9 +3,9 @@ import { Todo } from "../repositories/todo_repositories.js";
 class TodoServices {
     static async create(params) {
         if (!params.title) throw { name: 'invalidInput' }
-        
+
         const todo = await Todo.findTitle(params.title);
-        
+
         if (todo) throw { name: 'existTodo' }
 
         const newTodo = await Todo.create(params);
@@ -21,6 +21,14 @@ class TodoServices {
         const deleteTodo = await Todo.softDelete(id);
 
         return deleteTodo;
+    }
+
+    static async restore(id) {
+        if (!id) throw { name: 'notFound' }
+
+        const data = await Todo.update(id);
+
+        return data;
     }
 
     static async update(id, params) {

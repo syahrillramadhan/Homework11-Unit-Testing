@@ -32,6 +32,18 @@ class Todo {
 
         return data;
     }
+    static async update(id) {
+        const data = await prisma.todo.update({
+            where: {
+                id: id
+            },
+            data: {
+                deletedAt: null
+            },
+        });
+
+        return data;
+    }
 
     static async findAll() {
         const data = await prisma.todo.findMany({

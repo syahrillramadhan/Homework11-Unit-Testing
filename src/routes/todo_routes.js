@@ -8,6 +8,7 @@ todoRoutes.get('/todo/details/:id', TodoController.getById);
 todoRoutes.post('/create', TodoController.create);
 todoRoutes.put('/todo/update/:id', TodoController.update);
 todoRoutes.delete('/todo/:id', TodoController.softDelete);
+todoRoutes.put('/todo/:id', TodoController.restoreTodo);
 
 export {
     todoRoutes,

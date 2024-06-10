@@ -37,6 +37,21 @@ class TodoController {
         }
     }
 
+    static async restoreTodo(req, res, next) {
+        try {
+            const id = parseInt(req.params.id);
+            const data = await TodoServices.restore(id);
+
+            res.status(200).json({
+                message: 'Restore Todo Success',
+                data
+            });
+            
+        } catch (error) {
+            next(error);
+        }
+    }
+
     static async update(req, res, next) {
         try {
             const id = parseInt(req.params.id);

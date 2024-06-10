@@ -148,7 +148,7 @@ describe('Todo API', () => {
             .expect(200);
 
         expect(response.body).toHaveProperty('message', 'Update Todo Success');
-        expect(response.body.updatedTodo).toHaveProperty('title', 'Mantab udah di update');
+        expect(response.body.updatedTodo).toHaveProperty('title', 'Update todo abangkuhh');
     });
 
     it('should not update a non-existing todo', async () => {

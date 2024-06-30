@@ -1,67 +1,66 @@
 import { Todo } from "../repositories/todo_repositories.js";
 
 class TodoServices {
-    static async create(params) {
-        if (!params.title) throw { name: 'invalidInput' }
+  static async create(params) {
+    if (!params.title) throw { name: "invalidInput" };
 
-        const todo = await Todo.findTitle(params.title);
+    const todo = await Todo.findTitle(params.title);
 
-        if (todo) throw { name: 'existTodo' }
+    if (todo) throw { name: "existTodo" };
 
-        const newTodo = await Todo.create(params);
+    const newTodo = await Todo.create(params);
 
-        return newTodo;
-    }
+    return newTodo;
+  }
 
-    static async softDelete(id) {
-        const todo = await Todo.findById(id);
+  static async softDelete(id) {
+    const todo = await Todo.findById(id);
 
-        if (!todo) throw { name: 'notFound' }
+    if (!todo) throw { name: "notFound" };
 
-        const deleteTodo = await Todo.softDelete(id);
+    const deleteTodo = await Todo.softDelete(id);
 
-        return deleteTodo;
-    }
+    return deleteTodo;
+  }
 
-    static async restore(id) {
-        if (!id) throw { name: 'notFound' }
+  static async restore(id) {
+    if (!id) throw { name: "notFound" };
 
-        const data = await Todo.update(id);
+    const data = await Todo.update(id);
 
-        return data;
-    }
+    return data;
+  }
 
-    static async update(id, params) {
-        const todo = await Todo.findById(id);
+  static async update(id, params) {
+    const todo = await Todo.findById(id);
 
-        if (!params || Object.keys(params).length === 0) throw { name: 'invalidInput' }
+    if (!params || Object.keys(params).length === 0)
+      throw { name: "invalidInput" };
 
-        if (!todo) throw { name: 'notFound' }
+    if (!todo) throw { name: "notFound" };
 
-        const existingTodo = await Todo.findTitle(params.title);
+    const existingTodo = await Todo.findTitle(params.title);
 
-        if (existingTodo) throw { name: 'existTodo' }
+    if (existingTodo) throw { name: "existTodo" };
 
-        const updatedTodo = await Todo.update(id, params);
+    const updatedTodo = await Todo.update(id, params);
 
-        return updatedTodo;
-    }
+    return updatedTodo;
+  }
 
-    static async getAll() {
-        const data = await Todo.findAll();
+  static async getAll() {
+    const data = await Todo.findAll();
 
-        return data;
-    }
+    return data;
+  }
 
-    static async getById(id) {
-        const todo = await Todo.findById(id);
+  static async getById(id) {
+    const todo = await Todo.findById(id);
 
-        if (!todo) throw { name: 'notFound' }
+    if (!todo) throw { name: "notFound" };
 
-        return todo;
-    }
+    return todo;
+  }
 }
 
-export {
-    TodoServices
-}
+export { TodoServices };

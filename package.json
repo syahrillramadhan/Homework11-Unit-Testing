@@ -1,7 +1,7 @@
 {
   "name": "lah",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "server.js", 
   "type": "module",
   "scripts": {
     "test": "jest --watchAll=false verbose=true test/todos.test.js",
